@@ -4,7 +4,7 @@ import (
 	"io"
 	"math"
 
-	"github.com/nilsmagnus/grib/internal/reader"
+	"github.com/jpmono416/grib/internal/reader"
 )
 
 const INT_MAX = 9223372036854775807

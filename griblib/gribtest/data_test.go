@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/nilsmagnus/grib/griblib"
+	"github.com/jpmono416/grib/griblib"
 )
 
 func openGrib(t *testing.T, filename string) []*griblib.Message {
