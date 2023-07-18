@@ -2,6 +2,7 @@ package griblib
 
 import (
 	"fmt"
+	"github.com/jpmono416/grib/griblib/jpeg2000"
 	"image"
 	"io"
 )
@@ -41,11 +42,20 @@ func ParseData40(dataReader io.Reader) ([]float64, error) {
 func decodeImageData(dataReader io.Reader) (image.Image, error) {
 	// Read the JPEG-2000 compressed data
 	// TODO NOT WORKING, find a suitable way to decode JP2 format
-	imageData, _, err := image.Decode(dataReader)
-	if err != nil {
+	var byteData []byte
+	n, err := io.ReadFull(dataReader, byteData)
+
+	if err != nil || n == 0 {
 		// Default 1px square empty image
 		return image.NewRGBA(image.Rect(0, 0, 1, 1)),
 			fmt.Errorf("Error reading compressed data: %s", err.Error())
+	}
+
+	imageData, err := jpeg2000.Parse(byteData)
+	if err != nil {
+		// Default 1px square empty image
+		return image.NewRGBA(image.Rect(0, 0, 1, 1)),
+			fmt.Errorf("Error parsing data: %s", err.Error())
 	}
 	return imageData, nil
 }

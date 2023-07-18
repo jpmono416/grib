@@ -201,8 +201,8 @@ func readMessage(gribFile io.Reader, section0 Section0) (*Message, error) {
 			default:
 				err = fmt.Errorf("Unknown section number %d  (Something bad with parser or files)", sectionHead.Number)
 			}
-			if err != nil && !strings.Contains(err.Error(), "40") {
-				continue
+			if err != nil {
+				return &message, err
 			}
 		} else {
 			return &message, nil
