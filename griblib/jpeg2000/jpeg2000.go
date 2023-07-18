@@ -30,6 +30,8 @@ import (
 	"bytes"
 	"image"
 	"image/png"
+
+	"gopkg.in/gographics/imagick.v2/imagick"
 )
 
 // Parse a JEPG 2000 into an image.Image.
